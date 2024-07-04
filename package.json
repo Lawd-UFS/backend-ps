@@ -6,7 +6,8 @@
   "license": "ISC",
   "description": "",
   "scripts": {
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "dev": "nodemon --exec ts-node src/server.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
