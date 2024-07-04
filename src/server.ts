@@ -1,11 +1,14 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const PORT = process.env.SERVER_PORT ?? 5000;
 
 const app = express();
 
 dotenv.config();
 
-const PORT = process.env.SERVER_PORT ?? 5000;
 
 app.use(express.json());
 
@@ -30,6 +33,20 @@ app.post('/imc', (req: Request, res: Response) => {
         imc
     })
 })
+
+
+// Database connection
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
+
+mongoose.connect()
+.then(() => {
+    console.log('Database connected')
+})
+.catch((err: string) => {
+    console.log(err)
+});
+
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`)
