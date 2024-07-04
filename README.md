@@ -1,12 +1,11 @@
 # Plataforma do PS - Backend/API
 
-- [Plataforma do PS - Backend/API](#plataforma-do-ps---backendapi)
-  - [Introdução](#introdução)
-  - [Requisitos](#requisitos)
-  - [Instalação](#instalação)
-  - [Estrutura](#estrutura)
-  - [Desenvolvimento](#desenvolvimento)
-  - [Contribuição](#contribuição)
+- [Introdução](#introdução)
+- [Requisitos](#requisitos)
+- [Instalação](#instalação)
+- [Estrutura](#estrutura)
+- [Desenvolvimento](#desenvolvimento)
+- [Contribuição](#contribuição)
 
 ## Introdução
 
