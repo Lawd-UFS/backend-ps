@@ -19,7 +19,6 @@ Para o desenvolvimento e execução do backend, são necessárias as seguintes t
 - TypeScript
 - Express
 - MongoDB
-- Mongoose
 
 ## Instalação
 
