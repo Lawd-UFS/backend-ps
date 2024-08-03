@@ -1,8 +1,11 @@
 import mongoose, {Document, Schema, Types} from 'mongoose';
+import { Status } from './status.enum';
 
-interface ISchedule extends Document {
+export interface ISchedule extends Document {
     dateTime: Date;
-    evaluator: mongoose.Schema.Types.ObjectId;
+    evaluator: Types.ObjectId;
+    status?: Status;
+    candidate: mongoose.Schema.Types.ObjectId;
 }
 
 const ScheduleSchema: Schema = new Schema({
@@ -18,6 +21,15 @@ const ScheduleSchema: Schema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Evaluator',
         required: [true, 'É necessário informar um avaliador']
+    },
+    status: {
+        type: Number,
+        enum: Status,
+        default: null
+    },
+    candidate: {
+        type: Types.ObjectId,
+        ref: 'Candidate'
     }
 }, { collection: 'horarios' });
 
