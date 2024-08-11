@@ -25,7 +25,7 @@ const ScheduleSchema: Schema = new Schema({
     status: {
         type: Number,
         enum: Status,
-        default: null
+        default: Status.NotScheduled
     },
     candidate: {
         type: Types.ObjectId,

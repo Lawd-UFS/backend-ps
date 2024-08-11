@@ -2,12 +2,12 @@ import mongoose, { Types } from 'mongoose';
 import Schedule, { ISchedule } from "../models/Schedule";
 import { Status } from '../models/status.enum';
 
-const createSchedule = async (dateTime: Date, evaluatorId: Types.ObjectId, status?: Status, candidateId?: Types.ObjectId): Promise<ISchedule> => {
+const createSchedule = async (dateTime: Date, evaluatorId: Types.ObjectId): Promise<ISchedule> => {
     const schedule = new Schedule({
         dateTime, 
         evaluator: evaluatorId,
-        status: status || null,
-        candidate: candidateId || null
+        status: Status.NotScheduled,
+        candidate: null
     });
     return await schedule.save();
 };
@@ -15,5 +15,3 @@ const createSchedule = async (dateTime: Date, evaluatorId: Types.ObjectId, statu
 export default {
     createSchedule
 };
-
-    
