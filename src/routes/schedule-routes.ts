@@ -8,33 +8,28 @@ const router = Router();
  * /api/horarios:
  *   post:
  *     summary: Cria um novo horário
- *     description: Adiciona um novo horário de entrevista ao sistema.
- *     parameters:
- *       - in: body
- *         name: horario
- *         description: Dados do horário a ser criado.
- *         schema:
- *           type: object
- *           required:
- *             - dateTime
- *             - evaluatorId
- *           properties:
- *             dateTime:
- *               type: string
- *               format: date-time
- *               description: Data e hora do horário.
- *             evaluatorId:
- *               type: string
- *               description: ID do avaliador.
- *             status:
- *               type: integer
- *               description: Status do horário. Pode ser 1 (Não agendado), 2 (Agendado).
- *             candidateId:
- *               type: string
- *               description: ID do candidato associado.
+ *     description: Adiciona um novo horário de entrevista ao sistema
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - dateTime
+ *               - evaluatorId
+ *             properties:
+ *               dateTime:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Data e hora do horário (não pode ser uma data passada)
+ *               evaluatorId:
+ *                 type: string
+ *                 description: ID do avaliador (24 caracteres hexadecimais)
+ *                 pattern: "^[a-fA-F0-9]{24}$"
  *     responses:
  *       201:
- *         description: Horário criado com sucesso.
+ *         description: Horário criado com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -50,9 +45,9 @@ const router = Router();
  *                 candidateId:
  *                   type: string
  *       400:
- *         description: Erro de validação dos dados fornecidos.
+ *         description: Erro de validação dos dados fornecidos
  *       500:
- *         description: Erro interno do servidor.
+ *         description: Erro interno do servidor
  */
 router.post('/horarios', createSchedule);
 
