@@ -4,8 +4,8 @@ import { Status } from './status.enum';
 export interface ISchedule extends Document {
     dateTime: Date;
     evaluator: Types.ObjectId;
-    status?: Status;
-    candidate: mongoose.Schema.Types.ObjectId;
+    status: Status;
+    candidate: Types.ObjectId;
 }
 
 const ScheduleSchema: Schema = new Schema({
