@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { createSchedule } from '../controllers/schedule-controller';
-
+import { createSchedule, getSchedulesByEvaluatorId } from '../controllers/schedule-controller';
 const router = Router();
 
 /**
@@ -50,5 +49,44 @@ const router = Router();
  *         description: Erro interno do servidor
  */
 router.post('/horarios', createSchedule);
+
+
+/**
+ * @swagger
+ * /api/horarios/{evaluatorId}:
+ *   get:
+ *     summary: Obtém horários dado um avaliador
+ *     description: Retorna uma lista de horários de entrevista para um avaliador específico
+ *     parameters:
+ *       - in: path
+ *         name: evaluatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           pattern: "^[a-fA-F0-9]{24}$"
+ *         description: ID do avaliador (24 caracteres hexadecimais)
+ *     responses:
+ *       200:
+ *         description: Lista de horários obtida com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   dateTime:
+ *                     type: string
+ *                     format: date-time
+ *                   evaluatorId:
+ *                     type: string
+ *                   status:
+ *                     type: integer
+ *                   candidateId:
+ *                     type: string
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.get('/horarios/:evaluatorId', getSchedulesByEvaluatorId);
 
 export default router;
