@@ -12,6 +12,11 @@ const createSchedule = async (dateTime: Date, evaluatorId: Types.ObjectId): Prom
     return await schedule.save();
 };
 
+const getSchedulesByEvaluatorId = async (evaluatorId: Types.ObjectId): Promise<ISchedule[]> => {
+    return await Schedule.find({ evaluator: evaluatorId }).exec();
+};
+
 export default {
-    createSchedule
+    createSchedule,
+    getSchedulesByEvaluatorId,
 };

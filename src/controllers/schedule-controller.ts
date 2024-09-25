@@ -36,3 +36,40 @@ export const createSchedule = async (req: Request<{},{},ScheduleRequest>, res: R
         });
     }
 }
+
+export const getSchedulesByEvaluatorId = async (req: Request<{ evaluatorId: string }>, res: Response<ApiResponse<ScheduleResponse[]>>) => {
+    const { evaluatorId } = req.params;
+
+    if (!evaluatorId) return res.status(400).json({ 
+        success: false,
+        message: 'É necessário informar o id do avaliador'
+    });
+
+    // TODO: validar no futuro a validade do id de avaliador fornecido (quando estiverem implementadas as entidades de avaliador)
+
+    try {
+        const schedules = await scheduleService.getSchedulesByEvaluatorId(new Types.ObjectId(evaluatorId));
+        const scheduleResponses: ScheduleResponse[] = schedules.map(schedule => {
+            return {
+                id: schedule._id,
+                dateTime: schedule.dateTime,
+                evaluator: schedule.evaluator,
+                status: schedule.status,
+                candidate: schedule.candidate,
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            message: 'Horários recuperados com sucesso',
+            data: scheduleResponses
+        });
+    } catch (error: any) {
+        res.status(500).json({ 
+            success: false,
+            message: error.message 
+        });
+    }
+}
+
+export default { createSchedule, getSchedulesByEvaluatorId };
